@@ -1,9 +1,25 @@
 #!/bin/env bash
 
-import os
 import json
+import os
 import shlex
+import socket
 import subprocess
+
+
+# ================= net work codes ================
+# =================================================
+
+def connection(ip_host: str, port_host: str):
+    server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+    server.bind((ip_host, port_host))
+    server.listen()
+
+    conn, _ = server.accept()
+    return conn
+
+# ============== codes for termux =================
+# =================================================
 
 SENSOR_NAME='gyroscope'
 
@@ -34,6 +50,10 @@ def get_data_output(shell: Shell, output_length: int) -> dict:
         data_output += shell.readline()
 
     return json.loads(data_output)
+
+
+# ================= main function =================
+# =================================================
 
 if __name__ == '__main__':
     command_output = Shell(f'termux-sensor -s {SENSOR_NAME}')
