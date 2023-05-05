@@ -16,7 +16,7 @@ class Shell():
 
 def get_length_line_output(shell: Shell) -> int:
     '''descobrir quantas linhas precisa ler pra obter cada saida completa'''
-    length_json_output = 0
+    length_json_output = 1
     json_data = ''
 
     while True:
