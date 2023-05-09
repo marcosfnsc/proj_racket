@@ -51,15 +51,6 @@ if __name__ == '__main__':
     command_output = Shell(f'termux-sensor -s {SENSOR_NAME} -d 100')
     output_length = get_length_line_output(command_output)
 
-    while True:
-        data_output = get_data_output(command_output, output_length)
-        key = list(data_output.keys())[0]
-
-        eixo_x = data_output[key]['values'][0]
-        eixo_y = data_output[key]['values'][1]
-        eixo_z = data_output[key]['values'][2]
-        break
-
     async def handler(websocket, path):
         while True:
             data_output = get_data_output(command_output, output_length)
