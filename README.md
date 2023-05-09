@@ -26,4 +26,4 @@ pkg install curl -y
 ```console
 curl https://raw.githubusercontent.com/marcosfnsc/proj_racket/main/setup_termux.sh?token=GHSAT0AAAAAABVYGR6EG4YSVZMGOPEVG43YZC2Z5KA | bash
 ```
-> quando o script terminar de configurar, apareça a mensagem `configuração concluida`
+> quando o script terminar de configurar, aparecerá a mensagem `configuração concluida`
