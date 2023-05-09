@@ -48,7 +48,7 @@ def get_data_output(shell: Shell, output_length: int) -> dict:
 # =================================================
 
 if __name__ == '__main__':
-    command_output = Shell(f'termux-sensor -s {SENSOR_NAME}')
+    command_output = Shell(f'termux-sensor -s {SENSOR_NAME} -d 100')
     output_length = get_length_line_output(command_output)
 
     while True:
