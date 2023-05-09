@@ -13,8 +13,9 @@ npm install
 ```
 
 #### configuração no celular
-* ter instalado o aplicativo termux
-* ter instalado o aplicativo termux-api
+* ter  o aplicativo [termux](https://f-droid.org/en/packages/com.termux/) instalado
+* ter  o aplicativo [termux-api](https://f-droid.org/en/packages/com.termux.api/) instalado
+
 
 dentro do termux, executar o seguinte comando:
 ```console
