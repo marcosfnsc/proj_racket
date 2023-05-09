@@ -5,18 +5,10 @@ import os
 import shlex
 import socket
 import subprocess
+import asyncio
 
-
-# ================= net work codes ================
-# =================================================
-
-def connection(ip_host: str, port_host: str):
-    server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-    server.bind((ip_host, port_host))
-    server.listen()
-
-    conn, _ = server.accept()
-    return conn
+import websockets
+from websockets.server import serve
 
 # ============== codes for termux =================
 # =================================================
@@ -67,6 +59,21 @@ if __name__ == '__main__':
         eixo_y = data_output[key]['values'][1]
         eixo_z = data_output[key]['values'][2]
         break
+
+    async def handler(websocket, path):
+        while True:
+            data_output = get_data_output(command_output, output_length)
+            key = list(data_output.keys())[0]
+
+            eixo_x = data_output[key]['values'][0]
+            eixo_y = data_output[key]['values'][1]
+            eixo_z = data_output[key]['values'][2]
+            message = f'{eixo_x}|{eixo_y}|{eixo_z}'
+            await websocket.send(message)
+
+    start_server = serve(handler, "localhost", 8000)
+    asyncio.get_event_loop().run_until_complete(start_server)
+    asyncio.get_event_loop().run_forever()
 
     # cleanup sensor
     os.system('termux-sensor -c')
