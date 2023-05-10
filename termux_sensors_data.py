@@ -48,7 +48,7 @@ def get_data_output(shell: Shell, output_length: int) -> dict:
 # =============================================
 
 if __name__ == '__main__':
-    command_output = Shell(f'termux-sensor -s {SENSOR_NAME} -d 100')
+    command_output = Shell(f'termux-sensor -s {SENSOR_NAME} -d 50')
     output_length = get_length_line_output(command_output)
 
     async def handler(websocket, path):
@@ -64,7 +64,8 @@ if __name__ == '__main__':
 
     start_server = serve(handler,  port=8000)
     asyncio.get_event_loop().run_until_complete(start_server)
-    asyncio.get_event_loop().run_forever()
-
-    # cleanup sensor
-    os.system('termux-sensor -c')
+    try:
+        asyncio.get_event_loop().run_forever()
+    except:
+        # cleanup sensor
+        os.system('termux-sensor -c')
