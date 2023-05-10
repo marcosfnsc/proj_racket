@@ -44,8 +44,8 @@ def get_data_output(shell: Shell, output_length: int) -> dict:
     return json.loads(data_output)
 
 
-# ================= main function =================
-# =================================================
+# ================= main code =================
+# =============================================
 
 if __name__ == '__main__':
     command_output = Shell(f'termux-sensor -s {SENSOR_NAME} -d 100')
