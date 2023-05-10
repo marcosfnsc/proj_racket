@@ -27,7 +27,7 @@ function animate() {
 }
 
 animate();
-let web_socket = new WebSocket('ws://172.16.236.8:8000')
+let web_socket = new WebSocket('ws://10.0.0.68:8000')
 
 window.addEventListener('resize', function(event) {
   renderer.setSize( window.innerWidth, window.innerHeight );
@@ -37,17 +37,11 @@ web_socket.onmessage = function (event) {
   let coord = event.data.split('|')
 
   let axle_x_temp = parseFloat(coord[0])
-  if(Math.abs(axle_x_temp) > 0.05) {
-    cube.rotation.x += axle_x_temp/10
-  }
+  cube.rotation.x += axle_x_temp/20
   let axle_y_temp = parseFloat(coord[1])
-  if(Math.abs(axle_y_temp) > 0.05) {
-    cube.rotation.y += axle_y_temp/10
-  }
+  cube.rotation.y += axle_y_temp/20
   let axle_z_temp = parseFloat(coord[2])
-  if(Math.abs(axle_z_temp) > 0.05) {
-    cube.rotation.z += axle_z_temp/10
-  }
+  cube.rotation.z += axle_z_temp/20
 }
 
 let button_ref = document.getElementById('reset')
