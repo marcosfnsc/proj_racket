@@ -2,13 +2,15 @@
 
 set -o errexit
 
+pkg up
 pkg install -y \
   git \
+  nodejs \
   python \
   python-pip \
   termux-api
 
-git clone https://github.com/marcosfnsc/proj_racket.git
+git clone --depth 1 https://github.com/marcosfnsc/proj_racket.git
 
 # create venv for python
 cd proj_racket
