@@ -3,11 +3,9 @@
 import json
 import os
 import shlex
-import socket
 import subprocess
 import asyncio
 
-import websockets
 from websockets.server import serve
 
 # ============== codes for termux =================
@@ -52,7 +50,7 @@ if __name__ == '__main__':
     command_output = Shell(f'termux-sensor -s {SENSOR_NAME} -d 50')
     output_length = get_length_line_output(command_output)
 
-    async def handler(websocket, path):
+    async def handler(websocket):
         while True:
             data_output = get_data_output(command_output, output_length)
             key = list(data_output.keys())[0]
