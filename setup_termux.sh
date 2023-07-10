@@ -5,6 +5,7 @@ set -o errexit
 pkg up
 pkg install -y \
   git \
+  iprout2 \
   nodejs \
   python \
   python-pip \
