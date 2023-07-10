@@ -1,7 +1,6 @@
 #!/bin/env python
 
 import os
-import shlex
 import subprocess
 
 from flask import Flask
@@ -9,7 +8,6 @@ from flask_sock import Sock
 
 # ============== codes for termux =================
 # =================================================
-
 
 class Shell():
     def __init__(self, command: str) -> None:
@@ -20,7 +18,6 @@ class Shell():
 
 # ================= main code =================
 # =============================================
-
 
 if __name__ == '__main__':
     app = Flask(__name__)
