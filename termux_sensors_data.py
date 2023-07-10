@@ -3,8 +3,9 @@
 import os
 import shlex
 import subprocess
-import asyncio
-import websockets
+
+from flask import Flask
+from flask_sock import Sock
 
 # ============== codes for termux =================
 # =================================================
@@ -12,7 +13,7 @@ import websockets
 
 class Shell():
     def __init__(self, command: str) -> None:
-        self._subprocess_object = subprocess.Popen(shlex.split(command), stdout=subprocess.PIPE)
+        self._subprocess_object = subprocess.Popen(command, shell=True, stdout=subprocess.PIPE)
 
     def readline(self) -> str:
         return self._subprocess_object.stdout.readline().decode('utf-8')
@@ -22,19 +23,19 @@ class Shell():
 
 
 if __name__ == '__main__':
+    app = Flask(__name__)
+    sock = Sock(app)
+
     SENSORS = 'accel,gyro'
-    shell = Shell(f'termux-sensor -s {SENSORS} -d 50')
+    #shell = Shell(f'termux-sensor -s {SENSORS} -d 50')
+    run_site = Shell('cd racket_ui && npm run dev')
 
-    async def handler(websocket):
+    @sock.route('/')
+    def echo(sock):
         while True:
-            data_output = shell.readline()
-            await websocket.send(data_output)
+            #data_output = shell.readline()
+            data_output = 'casa'
+            sock.send(data_output)
 
-    async def main():
-        async with websockets.serve(handler, port=8000):
-            await asyncio.Future()
-    try:
-        asyncio.run(main())
-    except:
-        # cleanup sensor
-        os.system('termux-sensor -c')
+    app.run(port=8000)
+    os.system('termux-sensor -c') # cleanup sensor
