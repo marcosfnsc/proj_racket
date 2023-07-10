@@ -27,14 +27,13 @@ if __name__ == '__main__':
     sock = Sock(app)
 
     SENSORS = 'accel,gyro'
-    #shell = Shell(f'termux-sensor -s {SENSORS} -d 50')
+    shell = Shell(f'termux-sensor -s {SENSORS} -d 50')
     run_site = Shell('cd racket_ui && npm run dev')
 
     @sock.route('/')
     def echo(sock):
         while True:
-            #data_output = shell.readline()
-            data_output = 'casa'
+            data_output = shell.readline()
             sock.send(data_output)
 
     app.run(port=8000)
