@@ -3,13 +3,7 @@
 set -o errexit
 
 pkg up
-apt install -y \
-  git \
-  iprout2 \
-  nodejs \
-  python \
-  python-pip \
-  termux-api
+pkg install git iprout2 nodejs python python-pip termux-api
 
 git clone --depth 1 https://github.com/marcosfnsc/proj_racket.git
 
