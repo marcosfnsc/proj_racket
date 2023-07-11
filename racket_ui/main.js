@@ -30,7 +30,7 @@ function animate() {
 }
 
 animate();
-let web_socket = new WebSocket('ws://localhost:8000')
+let web_socket = new WebSocket('ws://10.0.0.96:8000')
 
 window.addEventListener('resize', function(event) {
   renderer.setSize( window.innerWidth, window.innerHeight );
@@ -38,27 +38,28 @@ window.addEventListener('resize', function(event) {
 
 web_socket.onmessage = function (event) {
   let json = JSON.parse(event.data)
+  console.log(json)
   var keys = Object.keys(json)
 
   var acel_eixo_x_data = json[keys[0]]['values'][0]
   var acel_eixo_x = document.getElementsByClassName('acel_eixo_x')
-  acel_eixo_x.innerHTML = `eixo X: ${acel_eixo_x_data}`
+  acel_eixo_x[0].innerHTML = `eixo X: ${acel_eixo_x_data}`
   var acel_eixo_y_data = json[keys[0]]['values'][1]
   var acel_eiyo_y = document.getElementsByClassName('acel_eixo_y')
-  acel_eiyo_y.innerHTML = `eixo Y: ${acel_eixo_y_data}`
+  acel_eiyo_y[0].innerHTML = `eixo Y: ${acel_eixo_y_data}`
   var acel_eixo_z_data = json[keys[0]]['values'][2]
   var acel_eizo_z = document.getElementsByClassName('acel_eixo_z')
-  acel_eizo_z.innerHTML = `eixo X: ${acel_eixo_z_data}`
+  acel_eizo_z[0].innerHTML = `eixo X: ${acel_eixo_z_data}`
 
   var giro_eixo_x_data = json[keys[1]]['values'][0]
   var giro_eixo_x = document.getElementsByClassName('giro_eixo_x')
-  giro_eixo_x.innerHTML = `eixo X: ${giro_eixo_x_data}`
+  giro_eixo_x[0].innerHTML = `eixo X: ${giro_eixo_x_data}`
   var giro_eixo_y_data = json[keys[1]]['values'][1]
   var giro_eiyo_y = document.getElementsByClassName('giro_eixo_y')
-  giro_eiyo_y.innerHTML = `eixo Y: ${giro_eixo_y_data}`
+  giro_eiyo_y[0].innerHTML = `eixo Y: ${giro_eixo_y_data}`
   var giro_eixo_z_data = json[keys[1]]['values'][2]
   var giro_eizo_z = document.getElementsByClassName('giro_eixo_z')
-  giro_eizo_z.innerHTML = `eixo X: ${giro_eixo_z_data}`
+  giro_eizo_z[0].innerHTML = `eixo X: ${giro_eixo_z_data}`
 
   let axle_x_temp = parseFloat(giro_eixo_x_data)
   cube.rotation.x += axle_x_temp/20
