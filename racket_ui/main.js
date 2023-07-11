@@ -38,7 +38,6 @@ window.addEventListener('resize', function(event) {
 
 web_socket.onmessage = function (event) {
   let json = JSON.parse(event.data)
-  console.log(json)
   var keys = Object.keys(json)
 
   var acel_eixo_x_data = json[keys[0]]['values'][0]
