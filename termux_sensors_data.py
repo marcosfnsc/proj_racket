@@ -34,8 +34,11 @@ if __name__ == '__main__':
     def echo(sock):
         while True:
             data_output = termux_shell.readline()
-            dict_data = json.loads(data_output)
-            sock.send(json.dumps(dict_data))
+            try:
+                dict_data = json.loads(data_output)
+                sock.send(json.dumps(dict_data))
+            except:
+                continue
 
     app.run(host='0.0.0.0', port=8000)
     os.system('termux-sensor -c') # cleanup sensor
