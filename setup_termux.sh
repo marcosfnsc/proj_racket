@@ -3,7 +3,7 @@
 set -o errexit
 
 pkg up
-pkg install \
+apt install -y \
   git \
   iprout2 \
   nodejs \
