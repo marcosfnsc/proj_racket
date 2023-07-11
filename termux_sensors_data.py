@@ -32,11 +32,13 @@ if __name__ == '__main__':
 
     @sock.route('/')
     def echo(sock):
+        data_output = ''
         while True:
-            data_output = termux_shell.readline()
             try:
+                data_output += termux_shell.readline()
                 dict_data = json.loads(data_output)
                 sock.send(json.dumps(dict_data))
+                data_output = ''
             except:
                 continue
 
