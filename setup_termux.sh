@@ -21,4 +21,7 @@ pip install --upgrade pip
 pip install -r requirements.txt
 deactvate
 
+# install depedencies of npm
+cd racket_ui && npm install
+
 echo "configuração concluida!"
