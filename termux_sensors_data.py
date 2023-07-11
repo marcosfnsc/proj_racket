@@ -28,6 +28,7 @@ if __name__ == '__main__':
     run_site = Shell('cd racket_ui && npm run dev -- --port 5173 --host')
 
     termux_shell = Shell(f'termux-sensor -s {SENSORS} -d 50')
+    termux_shell.readline()
 
     @sock.route('/')
     def echo(sock):
