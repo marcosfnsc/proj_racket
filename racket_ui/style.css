@@ -1,0 +1,20 @@
+.dados_brutos {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center
+}
+
+.data_item {
+  border: 1px solid lightblue;
+  border-radius: 10px;
+  transition: .7s;
+  display: flex;
+}
+
+.d3model {
+  border: 1px solid lightblue;
+  border-radius: 10px;
+  transition: .7s;
+  display: flex;
+}
