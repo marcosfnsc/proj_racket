@@ -22,15 +22,17 @@ class Shell():
 if __name__ == '__main__':
     app = Flask(__name__)
     sock = Sock(app)
-
     SENSORS = 'accel,gyro'
-    shell = Shell(f'termux-sensor -s {SENSORS} -d 50')
+
+    print(Shell('bash update_ip_address.sh').readline())
     run_site = Shell('cd racket_ui && npm run dev -- --port 5173 --host')
+
+    termux_shell = Shell(f'termux-sensor -s {SENSORS} -d 50')
 
     @sock.route('/')
     def echo(sock):
         while True:
-            data_output = shell.readline()
+            data_output = termux_shell.readline()
             sock.send(data_output)
 
     app.run(host='0.0.0.0', port=8000)
