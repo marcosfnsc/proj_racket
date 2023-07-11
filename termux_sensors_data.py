@@ -1,5 +1,6 @@
 #!/bin/env python
 
+import json
 import os
 import subprocess
 
@@ -28,13 +29,13 @@ if __name__ == '__main__':
     run_site = Shell('cd racket_ui && npm run dev -- --port 5173 --host')
 
     termux_shell = Shell(f'termux-sensor -s {SENSORS} -d 50')
-    termux_shell.readline()
 
     @sock.route('/')
     def echo(sock):
         while True:
             data_output = termux_shell.readline()
-            sock.send(data_output)
+            dict_data = json.loads(data_output)
+            sock.send(json.dumps(dict_data))
 
     app.run(host='0.0.0.0', port=8000)
     os.system('termux-sensor -c') # cleanup sensor
