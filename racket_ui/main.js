@@ -11,14 +11,14 @@ renderer.setSize( window.innerWidth, window.innerHeight );
 container.appendChild( renderer.domElement );
 
 const geometry = new THREE.BoxGeometry( 5, 1, 4 );
-var cubeMaterials = [ 
+var cubeMaterials = [
   new THREE.MeshBasicMaterial({color:0x03045e}),
-  new THREE.MeshBasicMaterial({color:0x023e8a}), 
+  new THREE.MeshBasicMaterial({color:0x023e8a}),
   new THREE.MeshBasicMaterial({color:0x0077b6}),
   new THREE.MeshBasicMaterial({color:0x03045e}),
-  new THREE.MeshBasicMaterial({color:0x023e8a}), 
+  new THREE.MeshBasicMaterial({color:0x023e8a}),
   new THREE.MeshBasicMaterial({color:0x0077b6}),
-]; 
+];
 const cube = new THREE.Mesh( geometry, cubeMaterials );
 scene.add( cube );
 
@@ -37,13 +37,34 @@ window.addEventListener('resize', function(event) {
 }, true);
 
 web_socket.onmessage = function (event) {
-  let coord = event.data.split('|')
+  let json = JSON.parse(event.data)
+  var keys = Object.keys(json)
 
-  let axle_x_temp = parseFloat(coord[0])
+  var acel_eixo_x_data = json[keys[0]]['values'][0]
+  var acel_eixo_x = document.getElementsByClassName('acel_eixo_x')
+  acel_eixo_x.innerHTML = `eixo X: ${acel_eixo_x_data}`
+  var acel_eixo_y_data = json[keys[0]]['values'][1]
+  var acel_eiyo_y = document.getElementsByClassName('acel_eixo_y')
+  acel_eiyo_y.innerHTML = `eixo Y: ${acel_eixo_y_data}`
+  var acel_eixo_z_data = json[keys[0]]['values'][2]
+  var acel_eizo_z = document.getElementsByClassName('acel_eixo_z')
+  acel_eizo_z.innerHTML = `eixo X: ${acel_eixo_z_data}`
+
+  var giro_eixo_x_data = json[keys[1]]['values'][0]
+  var giro_eixo_x = document.getElementsByClassName('giro_eixo_x')
+  giro_eixo_x.innerHTML = `eixo X: ${giro_eixo_x_data}`
+  var giro_eixo_y_data = json[keys[1]]['values'][1]
+  var giro_eiyo_y = document.getElementsByClassName('giro_eixo_y')
+  giro_eiyo_y.innerHTML = `eixo Y: ${giro_eixo_y_data}`
+  var giro_eixo_z_data = json[keys[1]]['values'][2]
+  var giro_eizo_z = document.getElementsByClassName('giro_eixo_z')
+  giro_eizo_z.innerHTML = `eixo X: ${giro_eixo_z_data}`
+
+  let axle_x_temp = parseFloat(giro_eixo_x_data)
   cube.rotation.x += axle_x_temp/20
-  let axle_y_temp = parseFloat(coord[1])
+  let axle_y_temp = parseFloat(giro_eixo_y_data)
   cube.rotation.y += axle_y_temp/20
-  let axle_z_temp = parseFloat(coord[2])
+  let axle_z_temp = parseFloat(giro_eixo_z_data)
   cube.rotation.z += axle_z_temp/20
 }
 
