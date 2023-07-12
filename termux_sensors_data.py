@@ -43,4 +43,5 @@ if __name__ == '__main__':
                 continue
 
     app.run(host='0.0.0.0', port=8000)
+    print(Shell('bash restore_ip_address.sh').readline())
     os.system('termux-sensor -c') # cleanup sensor
