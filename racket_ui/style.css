@@ -1,6 +1,7 @@
 .dados_brutos {
   display: flex;
   flex-direction: row;
+  flex-wrap: wrap;
   justify-content: center;
   align-items: center
 }
@@ -8,6 +9,17 @@
 .data_item {
   border: 1px solid lightblue;
   border-radius: 10px;
+  margin-right: 1px;
+  margin-left: 1px;
   transition: .7s;
-  display: flex;
+}
+
+h3 {
+  margin-right: 10px;
+  margin-left: 10px;
+}
+
+.model_3d {
+  border: 1px solid lightblue;
+  border-radius: 10px;
 }
