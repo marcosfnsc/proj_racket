@@ -25,7 +25,7 @@ if __name__ == '__main__':
     sock = Sock(app)
     SENSORS = 'accel,gyro'
 
-    print(Shell('bash update_ip_address.sh').readline())
+    print(Shell('bash scripts/update_ip_address.sh').readline())
     run_site = Shell('cd racket_ui && npm run dev -- --port 5173 --host')
 
     termux_shell = Shell(f'termux-sensor -s {SENSORS} -d 50')
@@ -43,5 +43,5 @@ if __name__ == '__main__':
                 continue
 
     app.run(host='0.0.0.0', port=8000)
-    print(Shell('bash restore_ip_address.sh').readline())
+    print(Shell('bash scripts/restore_ip_address.sh').readline())
     os.system('termux-sensor -c') # cleanup sensor
