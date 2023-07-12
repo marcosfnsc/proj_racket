@@ -30,7 +30,7 @@ function animate() {
 }
 
 animate();
-let web_socket = new WebSocket('ws://10.0.0.96:8000')
+let web_socket = new WebSocket('ws://localhost:8000')
 
 window.addEventListener('resize', function(event) {
   renderer.setSize( window.innerWidth, window.innerHeight );
